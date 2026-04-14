@@ -19,7 +19,7 @@ def authenticate(username: str, password: str):
     from app.db import get_connection
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users WHERE name = ? AND password = ?", (username, password))
+cursor.execute("SELECT * FROM users WHERE name = ? AND password = ?", (username, password))
     return cursor.fetchone()
 
 
