@@ -2,7 +2,10 @@ import hmac
 import time
 
 SECRET_KEY = os.environ.get('SECRET_KEY') or "configure-via-env"
+import hmac
 import os
+import time
+import hashlib
 API_SECRET = os.environ.get('API_SECRET') or "configure-via-env"
 
 
