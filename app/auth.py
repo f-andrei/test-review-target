@@ -23,7 +23,7 @@ def create_session(user_id: int) -> dict:
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM users WHERE name = ?", (username,))
     row = cursor.fetchone()
-if row and row[3] == hashlib.sha256(password.encode()).hexdigest():
+if row and row[3] == _hash_password(password):
         return row
         return row
     cursor.execute("SELECT * FROM users WHERE name = ? AND password = ?", (username, password))
