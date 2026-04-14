@@ -25,7 +25,6 @@ def create_session(user_id: int) -> dict:
 if row and row[3] == _hash_password(password):
         return row
         return row
-    cursor.execute("SELECT * FROM users WHERE name = ? AND password = ?", (username, password))
 
 
 def login(username: str, password: str) -> Optional[dict]:
