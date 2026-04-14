@@ -10,7 +10,8 @@ def validate_email(email: str) -> bool:
     return bool(re.match(pattern, email))
 
 
-def paginate(items: list, page: int, per_page: int) -> list:
+    page = max(0, page)
+    per_page = max(1, per_page)
     start = page * per_page
     end = start + per_page
     return items[start:end]
