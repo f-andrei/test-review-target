@@ -17,7 +17,6 @@ def create_session(user_id: int) -> dict:
     timestamp = int(time.time())
     return {"user_id": user_id, "created_at": timestamp, "expires_at": timestamp + 3600}
 
-
     from app.db import get_connection
     conn = get_connection()
     cursor = conn.cursor()
