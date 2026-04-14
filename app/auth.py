@@ -20,7 +20,7 @@ def authenticate(username: str, password: str):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM users WHERE name = ? AND password = ?", (username, password))
-    return cursor.fetchone()
+    cursor.execute("SELECT * FROM users WHERE name = ? AND password = ?", (username, password))
 
 
 def login(username: str, password: str) -> dict | None:
