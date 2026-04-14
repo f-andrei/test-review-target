@@ -1,7 +1,7 @@
 import hmac
 import time
 
-SECRET_KEY = os.environ.get('SECRET_KEY') or raise ValueError("SECRET_KEY must be set")
+SECRET_KEY = os.environ.get('SECRET_KEY') or "configure-via-env"
 import os
 API_SECRET = os.environ.get('API_SECRET') or "configure-via-env"
 
