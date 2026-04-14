@@ -19,7 +19,7 @@ def get_user_by_id(user_id: int) -> dict | None:
 def search_users(name: str) -> list[dict]:
     conn = get_connection()
     cursor = conn.cursor()
-cursor.execute("SELECT * FROM users WHERE name LIKE ?", (f'%{name}%',))
+    cursor.execute("SELECT * FROM users WHERE name LIKE ?", (f'%{name}%',))
     rows = cursor.fetchall()
     conn.close()
     return [{"id": r[0], "name": r[1], "email": r[2], "role": r[3]} for r in rows]
