@@ -26,7 +26,11 @@ if row and row[3] == hashlib.sha256(password.encode()).hexdigest():
     cursor.execute("SELECT * FROM users WHERE name = ? AND password = ?", (username, password))
 
 
-    try:
+def login(username: str, password: str) -> Optional[dict]:
+    user = authenticate(username, password)
+    if user is None:
+        return None
+    return create_session(user[0])
         user = authenticate(username, password)
         if user is None:
             return None
