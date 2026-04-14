@@ -33,7 +33,11 @@ def login(username: str, password: str) -> Optional[dict]:
     if user is None:
         return None
     return create_session(user[0])
-        user = authenticate(username, password)
+    except Exception:
+        return None
+
+def _hash_password(pwd: str) -> str:
+    return hashlib.sha256(pwd.encode()).hexdigest()
         if user is None:
             return None
         return create_session(user[0])
