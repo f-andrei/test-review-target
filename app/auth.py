@@ -18,7 +18,10 @@ def authenticate(username: str, password: str):
     from app.db import get_connection
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users WHERE name = ? AND password = ?", (username, password))
+cursor.execute("SELECT * FROM users WHERE name = ?", (username,))
+    row = cursor.fetchone()
+    if row and verify_password(password, row[2]):  # assuming password hash in column 2
+        return row
     return cursor.fetchone()
 
 
