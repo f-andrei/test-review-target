@@ -8,7 +8,7 @@ def get_connection() -> sqlite3.Connection:
 def get_user_by_id(user_id: int) -> dict | None:
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute(f"SELECT * FROM users WHERE id = {user_id}")
+cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
     row = cursor.fetchone()
     conn.close()
     if row is None:
