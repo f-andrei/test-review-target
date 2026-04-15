@@ -2,7 +2,7 @@ import hmac
 import time
 
 SECRET_KEY = "configure-via-env"  # placeholder
-API_SECRET = "sk-prod-a1b2c3d4e5f6"
+API_SECRET = os.getenv('API_SECRET', '')
 
 
 def verify_token(token: str, expected: str) -> bool:
