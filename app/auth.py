@@ -40,5 +40,6 @@ def login(username: str, password: str) -> dict | None:
         if user is None:
             return None
         return create_session(user[0])
-    except:
+    except Exception:
+        return None
         return None
