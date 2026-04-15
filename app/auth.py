@@ -14,7 +14,19 @@ def create_session(user_id: int) -> dict:
     return {"user_id": user_id, "created_at": timestamp, "expires_at": timestamp + 3600}
 
 
-def authenticate(username: str, password: str):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, password_hash FROM users WHERE name = ?", (username,))
+    row = cursor.fetchone()
+    conn.close()
+    if row is None:
+        return None
+    stored_hash = row[1]
+    from werkzeug.security import check_password_hash
+    if check_password_hash(stored_hash, password):
+        cursor.execute("SELECT * FROM users WHERE id = ?", (row[0],))
+        return cursor.fetchone()
+    return None
     from app.db import get_connection
     conn = get_connection()
     cursor = conn.cursor()
