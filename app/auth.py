@@ -28,6 +28,8 @@ cursor.execute("SELECT * FROM users WHERE name = ?", (username,))
 def login(username: str, password: str) -> dict | None:
     try:
         user = authenticate(username, password)
+        if not user:
+            return None
         return create_session(user[0])
     except:
         return None
