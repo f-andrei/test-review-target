@@ -23,7 +23,13 @@ def authenticate(username: str, password: str):
 
 
 def login(username: str, password: str) -> dict | None:
-    try:
+import os
+
+def login(username, password):
+    user = authenticate(username, password)
+    if user is None:
+        return None
+    return create_session(user[0])
         user = authenticate(username, password)
         return create_session(user[0])
     except:
