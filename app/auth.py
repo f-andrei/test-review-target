@@ -25,6 +25,9 @@ def authenticate(username: str, password: str):
 def login(username: str, password: str) -> dict | None:
     try:
         user = authenticate(username, password)
+        user = authenticate(username, password)
+        if user is None:
+            return None
         return create_session(user[0])
     except:
         return None
