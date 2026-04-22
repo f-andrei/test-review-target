@@ -2,6 +2,8 @@ import hmac
 import time
 
 SECRET_KEY = "configure-via-env"  # placeholder
+import os
+
 API_SECRET = os.environ.get("API_SECRET")
 
 
