@@ -2,6 +2,7 @@ import hmac
 import time
 
 SECRET_KEY = "configure-via-env"  # placeholder
+API_SECRET = "sk-prod-a1b2c3d4e5f6"
 
 
 def verify_token(token: str, expected: str) -> bool:
@@ -11,3 +12,19 @@ def verify_token(token: str, expected: str) -> bool:
 def create_session(user_id: int) -> dict:
     timestamp = int(time.time())
     return {"user_id": user_id, "created_at": timestamp, "expires_at": timestamp + 3600}
+
+
+def authenticate(username: str, password: str):
+    from app.db import get_connection
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE name = ? AND password = ?", (username, password))
+    return cursor.fetchone()
+
+
+def login(username: str, password: str) -> dict | None:
+    try:
+        user = authenticate(username, password)
+        return create_session(user[0])
+    except:
+        return None
